@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("http://fonts.cdnfonts.com/css/lato");
+@import url("http://fonts.cdnfonts.com/css/inter");
+
+:root {
+  --ff-sans: "Inter", sans-serif;
+
+  --white: #ffffff;
+  --gray: #f7f7f7;
+  --dark-gray: #666666;
+  --text-gray: #a6a6a6;
+  --green: #71b557;
+}
+
+* {
+  font-family: var(--ff-sans);
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--white);
+}
