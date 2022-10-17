@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validator, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { LoginService } from 'src/app/services/login.service';
+import { TokenService } from 'src/app/services/token.service';
 
 declare let loginForm: any;
 
@@ -9,12 +13,50 @@ declare let loginForm: any;
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  email = new FormControl('');
-  password = new FormControl('');
+  loginForm = new FormGroup({
+    email: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+  });
 
-  constructor() {}
+  constructor(
+    private router: Router,
+    private loginService: LoginService,
+    private tokenService: TokenService
+  ) {}
 
   ngOnInit(): void {
     new loginForm();
+    if (this.tokenService.getToken()) {
+      this.router.navigate(['/']);
+    }
+  }
+
+  onLogin() {
+    document.getElementById('loading')!.style.visibility = 'visible';
+    this.loginService
+      .login({
+        email: this.loginForm.get('email')?.value!,
+        password: this.loginForm.get('password')?.value!,
+      })
+      .subscribe(
+        (data) => {
+          this.tokenService.setToken(data.token);
+          this.router.navigate(['/home']);
+        },
+        (err) => {
+          console.log(err);
+          document.getElementById('loading')!.style.visibility = 'hidden';
+          this.loginFail();
+        }
+      );
+  }
+
+  loginFail() {
+    Swal.fire({
+      title: 'Usuario o contraseña incorrectos',
+      icon: 'error',
+      showConfirmButton: false,
+      timer: 1500,
+    });
   }
 }
