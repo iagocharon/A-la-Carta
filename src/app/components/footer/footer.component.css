@@ -1,0 +1,16 @@
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 30px;
+  background-color: var(--gray);
+  color: var(--dark-gray);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a {
+  color: var(--dark-gray);
+  text-decoration: none;
+}

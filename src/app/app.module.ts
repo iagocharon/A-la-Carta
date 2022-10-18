@@ -12,6 +12,7 @@ import { SearchComponent } from './components/search/search.component';
 import { ItemComponent } from './components/item/item.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { DetailsComponent } from './components/details/details.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { DetailsComponent } from './components/details/details.component';
     ItemComponent,
     NavbarComponent,
     DetailsComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
