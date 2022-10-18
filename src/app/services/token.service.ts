@@ -19,6 +19,10 @@ export class TokenService {
     return localStorage.getItem(TOKEN_KEY) || '';
   }
 
+  public isLogged(): boolean {
+    return this.getToken() !== '';
+  }
+
   public logOut(): void {
     window.localStorage.clear();
   }
