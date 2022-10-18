@@ -1,0 +1,18 @@
+<header>
+  <nav class="content">
+    <div class="title">
+      <img src="../../../assets/svg/logo_white.svg" alt="" />
+    </div>
+    <ul class="menu">
+      <a routerLink="/home">
+        <li>Menú</li>
+      </a>
+      <a routerLink="/search">
+        <li>Buscador de Platos</li>
+      </a>
+      <button class="logout" *ngIf="isLogged" (click)="onLogout()">
+        Cerrar Sesión
+      </button>
+    </ul>
+  </nav>
+</header>
