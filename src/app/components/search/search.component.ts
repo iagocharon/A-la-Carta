@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlatoService } from 'src/app/services/plato.service';
-import { SearchService } from 'src/app/services/search.service';
-import { Plato } from 'src/app/models/plato';
+import { MenuService } from 'src/app/services/menu.service';
 import { debounceTime, map, Observable, Subject } from 'rxjs';
 
 @Component({
@@ -12,13 +11,13 @@ import { debounceTime, map, Observable, Subject } from 'rxjs';
 export class SearchComponent implements OnInit {
   search: string = '';
 
-  platos: Plato[] = [];
+  resultados: any[] = [];
 
   subject = new Subject<void>();
 
   constructor(
-    private searchService: SearchService,
-    private platoService: PlatoService
+    private platoService: PlatoService,
+    private menuService: MenuService
   ) {}
 
   ngOnInit(): void {
@@ -29,15 +28,19 @@ export class SearchComponent implements OnInit {
 
   getPlatos() {
     if (this.search.length > 2) {
-      this.searchService
+      this.platoService
         .getSearch(this.search)
-        .pipe(debounceTime(1000))
+        .pipe(debounceTime(800))
         .subscribe((data: any) => {
-          this.platos = [];
-          data['menuItems'].forEach((element: Plato) => {
-            console.log(element);
-            this.platos.push(element);
-            console.log(this.platos);
+          console.log(data);
+          this.resultados = [];
+          data['results'].forEach((plato: any) => {
+            console.log(plato);
+            this.platoService.getPlato(plato.id).subscribe((data: any) => {
+              // if (this.menuService.getPlatos().indexOf(plato) === -1) {
+              this.resultados.push(data);
+              // }
+            });
           });
         });
     }

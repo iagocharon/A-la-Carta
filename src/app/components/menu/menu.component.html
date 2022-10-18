@@ -1,5 +1,7 @@
-<div class="menu-wrapper">
+<div class="menu-wrapper content">
   <div class="menu">
-    <app-item></app-item>
+    <div *ngFor="let plato of platos">
+      <app-item [plato]="plato" [delete]="true"></app-item>
+    </div>
   </div>
 </div>

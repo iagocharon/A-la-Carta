@@ -8,18 +8,20 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
-import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 import { ItemComponent } from './components/item/item.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { DetailsComponent } from './components/details/details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MenuComponent,
-    HomeComponent,
     SearchComponent,
     ItemComponent,
+    NavbarComponent,
+    DetailsComponent,
   ],
   imports: [
     BrowserModule,

@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', Validators.required),
   });
 
+  isLogged!: boolean;
+
   constructor(
     private router: Router,
     private loginService: LoginService,
@@ -25,6 +27,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isLogged = this.tokenService.getToken() ? true : false;
     new loginForm();
     if (this.tokenService.getToken()) {
       this.router.navigate(['/']);
@@ -42,6 +45,7 @@ export class LoginComponent implements OnInit {
         (data) => {
           this.tokenService.setToken(data.token);
           this.router.navigate(['/home']);
+          window.location.reload();
         },
         (err) => {
           console.log(err);
