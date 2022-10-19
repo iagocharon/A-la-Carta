@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { PlatoService } from './plato.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +13,15 @@ export class MenuService {
   avgTime: number = 0;
   avgScore: number = 0;
 
-  constructor() {}
+  constructor(private platoService: PlatoService) {}
+
+  setPlatos() {
+    this.platos = JSON.parse(localStorage.getItem('menu')!);
+    this.updateTotals();
+  }
 
   getPlatos() {
+    this.setPlatos();
     return this.platos;
   }
 
@@ -23,6 +30,7 @@ export class MenuService {
       if (this.checkType(plato)) {
         this.platos.push(plato);
         this.updateTotals();
+        this.savePlato(plato);
         return 0;
       } else if (plato.vegan) {
         return -1;
@@ -80,6 +88,7 @@ export class MenuService {
     let index = this.platos.indexOf(plato);
     if (index > -1) {
       this.platos.splice(index, 1);
+      this.deletePlato(plato);
       this.updateTotals();
       return 0;
     }
@@ -93,5 +102,23 @@ export class MenuService {
     this.totalPrice = 0;
     this.avgTime = 0;
     this.avgScore = 0;
+  }
+
+  savePlato(plato: any) {
+    let menu: any[] = [];
+    if (JSON.parse(localStorage.getItem('menu')!)) {
+      menu = JSON.parse(localStorage.getItem('menu')!);
+    }
+    menu.push(plato);
+    localStorage.setItem('menu', JSON.stringify(menu));
+  }
+
+  deletePlato(plato: any) {
+    let menu = JSON.parse(localStorage.getItem('menu')!);
+    let index = menu.indexOf(plato);
+    if (index > -1) {
+      menu.splice(index, 1);
+    }
+    localStorage.setItem('menu', JSON.stringify(menu));
   }
 }

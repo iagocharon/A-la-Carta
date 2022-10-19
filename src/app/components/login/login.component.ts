@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
           this.tokenService.setToken(data.token);
           this.router.navigate(['/home']);
           window.location.reload();
+          localStorage.setItem('menu', JSON.stringify([]));
         },
         (err) => {
           console.log(err);
