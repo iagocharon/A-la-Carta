@@ -4,4 +4,12 @@
       <app-item [plato]="plato" [delete]="true"></app-item>
     </div>
   </div>
+  <app-menu-info
+    [size]="platos.length"
+    [vegan]="vegan"
+    [nonVegan]="nonVegan"
+    [totalPrice]="totalPrice"
+    [avgTime]="avgTime"
+    [avgScore]="avgScore"
+  ></app-menu-info>
 </div>

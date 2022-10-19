@@ -1,0 +1,12 @@
+.menu-info {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  height: 30px;
+  width: 100vw;
+  background-color: var(--green);
+  color: var(--white);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}

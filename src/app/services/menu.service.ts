@@ -17,12 +17,34 @@ export class MenuService {
 
   setPlatos() {
     this.platos = JSON.parse(localStorage.getItem('menu')!);
-    this.updateTotals();
+    if (this.platos.length > 0) {
+      this.updateTotals();
+    }
   }
 
   getPlatos() {
     this.setPlatos();
     return this.platos;
+  }
+
+  getVegan() {
+    return this.vegan;
+  }
+
+  getNonVegan() {
+    return this.nonVegan;
+  }
+
+  getTotalPrice() {
+    return this.totalPrice;
+  }
+
+  getAvgTime() {
+    return this.avgTime;
+  }
+
+  getAvgScore() {
+    return this.avgScore;
   }
 
   add(plato: any) {
