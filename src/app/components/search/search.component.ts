@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.subject.pipe(debounceTime(1000)).subscribe(() => {
+    this.subject.pipe(debounceTime(600)).subscribe(() => {
       this.getPlatos();
     });
   }

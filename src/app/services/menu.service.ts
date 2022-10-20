@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PlatoService } from './plato.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class MenuService {
   avgTime: number = 0;
   avgScore: number = 0;
 
-  constructor(private platoService: PlatoService) {}
+  constructor(private platoService: PlatoService, private router: Router) {}
 
   setPlatos() {
     this.platos = JSON.parse(localStorage.getItem('menu')!);
@@ -53,6 +54,7 @@ export class MenuService {
         this.platos.push(plato);
         this.updateTotals();
         this.savePlato(plato);
+        this.router.navigate(['/home']);
         return 0;
       } else if (plato.vegan) {
         return -1;
@@ -112,6 +114,7 @@ export class MenuService {
       this.platos.splice(index, 1);
       this.deletePlato(plato);
       this.updateTotals();
+      this.router.navigate(['/home']);
       return 0;
     }
     return -1;
@@ -137,10 +140,26 @@ export class MenuService {
 
   deletePlato(plato: any) {
     let menu = JSON.parse(localStorage.getItem('menu')!);
-    let index = menu.indexOf(plato);
-    if (index > -1) {
-      menu.splice(index, 1);
-    }
+    menu.forEach((platoMenu: any) => {
+      if (platoMenu.id == plato.id) {
+        menu.splice(menu.indexOf(platoMenu), 1);
+      }
+    });
     localStorage.setItem('menu', JSON.stringify(menu));
+    window.location.reload();
+  }
+
+  isInMenu(id: number): boolean {
+    let result = false;
+    this.getPlatos();
+
+    console.log(this.platos);
+    this.platos.forEach((plato: any) => {
+      if (plato.id == id) {
+        console.log('esta en el menu');
+        result = true;
+      }
+    });
+    return result;
   }
 }

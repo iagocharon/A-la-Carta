@@ -39,3 +39,20 @@
   flex-wrap: wrap;
   gap: 32px;
 }
+
+.not-found {
+  animation-name: not-found;
+  animation-duration: 650ms;
+}
+
+@keyframes not-found {
+  0% {
+    opacity: 0;
+  }
+  99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

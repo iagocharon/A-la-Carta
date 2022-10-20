@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MenuService } from 'src/app/services/menu.service';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,7 +13,7 @@ export class ItemComponent implements OnInit {
   @Input() add!: boolean;
   @Input() delete!: boolean;
 
-  constructor(private menuService: MenuService) {}
+  constructor(private menuService: MenuService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -22,6 +23,10 @@ export class ItemComponent implements OnInit {
     } else {
       return 'No';
     }
+  }
+
+  onDetails() {
+    this.router.navigate(['/details', this.plato.id]);
   }
 
   onAdd() {
@@ -59,6 +64,7 @@ export class ItemComponent implements OnInit {
   }
 
   onDelete() {
+    console.log('delete');
     let response = this.menuService.delete(this.plato);
     if (response === 0) {
       Swal.fire({

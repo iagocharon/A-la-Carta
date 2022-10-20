@@ -22,7 +22,7 @@
     <p *ngIf="search.length <= 2">
       Ingrese más de 2 caracteres para obtener resultados
     </p>
-    <p *ngIf="search.length > 2 && resultados.length === 0">
+    <p *ngIf="search.length > 2 && resultados.length === 0" class="not-found">
       No se encontraron resultados
     </p>
   </div>
