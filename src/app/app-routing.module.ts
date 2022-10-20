@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { SearchComponent } from './components/search/search.component';
 import { LoggedGuard } from './guards/logged.guard';
+import { DetailsComponent } from './components/details/details.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,12 @@ const routes: Routes = [
     path: 'search',
     title: 'A la Carta - Buscar',
     component: SearchComponent,
+    canActivate: [LoggedGuard],
+  },
+  {
+    path: 'details/:id',
+    title: 'A la Carta - Detalles',
+    component: DetailsComponent,
     canActivate: [LoggedGuard],
   },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
